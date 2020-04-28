@@ -1,35 +1,35 @@
-import colors from "./colors";
 import { Dimensions } from "react-native";
+import { fontSizes, marginSizesHeight, marginSizesWidth, widthSize } from "./sizes";
 
 const WIDTH = Dimensions.get('window').width
 
 
 export default globalStyle = {
-    screenPadding: 16,
+    screenPadding: marginSizesWidth._16,
     primaryContainer: {
-        paddingHorizontal: 16,
-        width: "90%",
+        paddingHorizontal: marginSizesWidth._16,
+        width: widthSize._90,
         alignSelf: 'center',
         // backgroundColor: colors.background,
         flex: 1,
     },
     divider: {
-        width: '100%',
+        width: widthSize._100,
         height: 1,
         fontWeight: 'bold',
         borderBottomWidth: 1,
         borderBottomColor: "#E5E5E5",
-        marginBottom: 16,
+        marginBottom: marginSizesHeight._16,
     },
     heading: {
-        fontSize: 34,
+        fontSize: fontSizes._34,
         fontWeight: "bold",
         color: "#000"
     },
     card: {
         borderRadius: 5,
-        padding: 16,
-        marginBottom: 16,
+        padding: marginSizesWidth._16,
+        marginBottom: marginSizesHeight._16,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
