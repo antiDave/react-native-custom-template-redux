@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { StyleProp, ViewStyle } from "react-native";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -13,7 +14,7 @@ import Foundation from 'react-native-vector-icons/Foundation';
 
 interface CIInterface {
 	iconType: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "Foundation";
-	style: object;
+	style: StyleProp<ViewStyle>;
 	name: any;
 	size: number;
 	color: any;
@@ -36,27 +37,27 @@ export default class CustomIcon extends React.Component<CIInterface, any> {
 		let { iconType, style, color, size, name } = this.props;
 
 		if (iconType === 'Ionicons') {
-			return <Ionicons name={name} color={color} size={size} style={{ ...style }} />
+			return <Ionicons name={name} color={color} size={size} style={[style]} />
 		} else if (iconType === 'AntDesign') {
-			return <AntDesign name={name} color={color} size={size} style={{ ...style }} />;
+			return <AntDesign name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'Entypo') {
-			return <Entypo name={name} color={color} size={size} style={{ ...style }} />;
+			return <Entypo name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'EvilIcons') {
-			return <EvilIcons name={name} color={color} size={size} style={{ ...style }} />;
+			return <EvilIcons name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'Feather') {
-			return <Feather name={name} color={color} size={size} style={{ ...style }} />;
+			return <Feather name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'FontAwesome') {
-			return <FontAwesome name={name} color={color} size={size} style={{ ...style }} />;
+			return <FontAwesome name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'Fontisto') {
-			return <Fontisto name={name} color={color} size={size} style={{ ...style }} />;
+			return <Fontisto name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'MaterialCommunityIcons') {
-			return <MaterialCommunityIcons name={name} color={color} size={size} style={{ ...style }} />;
+			return <MaterialCommunityIcons name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'MaterialIcons') {
-			return <MaterialIcons name={name} color={color} size={size} style={{ ...style }} />;
+			return <MaterialIcons name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'Foundation') {
-			return <Foundation name={name} color={color} size={size} style={{ ...style }} />;
+			return <Foundation name={name} color={color} size={size} style={[style]} />;
 		} else {
-			return <Ionicons name={name} color={color} size={size} style={{ ...style }} />;
+			return <Ionicons name={name} color={color} size={size} style={[style]} />;
 		}
 
 	};
