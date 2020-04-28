@@ -19,6 +19,9 @@ React, React Native, React Native Async Storeage ,React Native Masked View, Reac
 | yarn add @react-navigation/stack  |
 | ------------- | 
 
+| yarn add --dev react-native-svg-transformer |
+| ------------- | 
+
 |If you are using Mac| 
 | ------------- | 
 |npx pod-install ios  <br/> OR <br/> cd ios <br/> pod install <br/>  |
