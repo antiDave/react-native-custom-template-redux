@@ -36,6 +36,8 @@ Download zip <br/> unzip in the root folder of the project
 # How to Remove Redux from Project 
 Remove in src/routes/index.js <br/> line# 4, 5, 20, 26
 <br/><br/>
+Delete src/redux folder
+<br/><br/>
 Replace src/screens/Dashboard/index.js with below code
 ```
 
@@ -58,5 +60,3 @@ export default class index extends Component {
   }
 }
 ```
-<br/><br/>
-Delete src/redux folder
