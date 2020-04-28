@@ -1,32 +1,36 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, StyleProp, ViewStyle } from 'react-native';
+//END OF IMPORT's
 
-interface CTInterface {
-    style: object;
-}
 
-export default class CustomText extends Component<CTInterface, any> {
-    constructor(props: CTInterface) {
+interface componentInterface {
+    style?: StyleProp<ViewStyle>;
+}//end of INTERFACE 
+
+
+export default class CustomText extends Component<componentInterface, any> {
+
+    constructor(props: componentInterface) {
         super(props);
-        this.state = {};
-    }
+        this.state = {
+        };
+    }//end of CONSTRUCTOR
 
     public static defaultProps = {
-        style: null,
-    };
+
+    };//end of DEFAULT PROPS DECLARATION
 
     render() {
         let { style } = this.props;
-
-
         return (
-            <Text style={{ ...styles.text, ...style }}>{this.props.children}</Text>
-        );
+            <Text style={[style, styles.text]}>{this.props.children}</Text>
+        )
     } // end of Function Render
+
 } //end of class CustomText
+
 
 const styles = StyleSheet.create({
     text: {
-
     }
 }); //end of StyleSheet STYLES
