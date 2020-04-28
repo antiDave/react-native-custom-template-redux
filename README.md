@@ -34,9 +34,4 @@ React, React Native, React Native Async Storeage ,React Native Masked View, Reac
 Download zip <br/> unzip in the root folder of the project
 
 # How to Remove Redux from Project 
-Remove in src/routes/index.js <br/>
-
-import { Provider } from 'react-redux';<br/>
-import store from "../redux/store";<br/>
-<Provider store={store}><br/>
-</Provider><br/>
+Remove in src/routes/index.js <br/> line# 4, 5, 20, 26
