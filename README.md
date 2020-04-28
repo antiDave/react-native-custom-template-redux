@@ -19,7 +19,7 @@ React, React Native, React Native Async Storeage ,React Native Masked View, Reac
 | yarn add @react-navigation/stack  |
 | ------------- | 
 
-| npx pod-install ios  <br/> OR <br/> cd ios <br/> pod install <br/>  |
+|If you are using Mac<br/><br/> npx pod-install ios  <br/> OR <br/> cd ios <br/> pod install <br/>  |
 | ------------- | 
 
 # ⚛️ Usage
