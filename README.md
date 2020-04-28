@@ -39,7 +39,7 @@ Remove in src/routes/index.js <br/> line# 4, 5, 20, 26
 Delete src/redux folder
 <br/><br/>
 Replace src/screens/Dashboard/index.js with below code
-```
+```js
 
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
