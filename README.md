@@ -19,7 +19,7 @@ React, React Native, React Native Async Storeage ,React Native Masked View, Reac
 | yarn add @react-navigation/stack  |
 | ------------- | 
 
-| yarn add --dev react-native-svg-transformer |
+| yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver |
 | ------------- | 
 
 |If you are using Mac| 
