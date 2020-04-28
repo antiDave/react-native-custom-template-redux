@@ -37,3 +37,24 @@ Download zip <br/> unzip in the root folder of the project
 Remove in src/routes/index.js <br/> line# 4, 5, 20, 26
 <br/><br/>
 Replace src/screens/Dashboard/index.js with below code
+```
+
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+export default class index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  render() {
+    return (
+      <View>
+        <Text> index </Text>
+      </View>
+    );
+  }
+}
+```
