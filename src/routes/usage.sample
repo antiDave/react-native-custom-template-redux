@@ -1,0 +1,122 @@
+import React, { Component } from 'react';
+import { Dimensions, View, StatusBar, Text, SafeAreaView } from 'react-native';
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from '@react-navigation/native';
+
+import CustomHeader from "../components/CustomHeader";
+import _retrieveData from '../sharedPreferences/_retrieveData';
+import { sleep } from '../helper/genericFunctions';
+import CustomDrawer from '../components/CustomDrawer';
+
+// screens Import
+import Splash from "../screens/Splash";
+// Before Login
+import Login from "../screens/Login";
+import ForgotPassword from "../screens/ForgotPassword";
+
+// After Login
+import Dashboard from "../screens/Dashboard";
+import AddChild from "../screens/AddChild";
+import ViewDetail from "../screens/ViewDetail";
+import EditChild from "../screens/EditChild";
+
+// screens Import End
+
+var width = Dimensions.get('window').width / 1.2;
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+console.disableYellowBox = true;
+
+export class LoginStack extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            isLoggedIn: false
+        };
+    }
+
+    componentDidMount = async () => {
+        const loginId = await _retrieveData("loginId");
+        await sleep(0);
+        if (loginId) {
+            this.setState({
+                isLoggedIn: true,
+                loading: false
+            })
+        }
+        else {
+            this.setState({
+                isLoggedIn: false,
+                loading: false
+            })
+        }
+    }
+
+    setIsLoggedIn = (isLoggedIn) => { this.setState({ isLoggedIn }); }
+
+    beforeLogin = () => {
+        const LoginScreens = (props) => <Login {...props} setIsLoggedIn={this.setIsLoggedIn} />
+        return (
+            <Stack.Navigator screenOptions={{
+                headerShown: false,
+                header: props =>
+                    <CustomHeader title={props.scene.route.name} navigation={props.navigation} {...props} />
+            }}>
+                <Stack.Screen name="Login" component={LoginScreens} />
+                <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+
+            </Stack.Navigator>
+        );
+    }//end of BEFOR LOGIN
+
+    render() {
+        let { isLoggedIn, loading } = this.state;
+        if (loading) {
+            return (
+                <Stack.Navigator>
+                    <Stack.Screen name="Splash" component={Splash} />
+                </Stack.Navigator>
+            )
+        }
+
+        if (isLoggedIn) {
+            return this.afterLogin()
+        }
+        else {
+            return this.beforeLogin()
+        }
+
+    }//end oF RENDER
+
+    afterLogin = () => {
+
+        return (
+            <NavigationContainer independent={true}>
+                <Stack.Navigator screenOptions={{
+                    headerShown: false
+                }}>
+                    <Stack.Screen name="Dashboard" component={this.DashboardStack} />
+                    <Stack.Screen name="AddChild" component={AddChild} />
+                    <Stack.Screen name="ViewDetail" component={ViewDetail} />
+                    <Stack.Screen name="EditChild" component={EditChild} />
+                </Stack.Navigator>
+            </NavigationContainer>
+
+        )
+    }//end of AFTER LOGIN
+
+    DashboardStack = () => {
+        return (
+            <Drawer.Navigator
+                drawerContent={(props) => <CustomDrawer {...props} setIsLoggedIn={this.setIsLoggedIn} />} >
+                <Drawer.Screen name="Dashboard" component={Dashboard} />
+            </Drawer.Navigator>
+        )
+    }
+
+}//end of Class
+
