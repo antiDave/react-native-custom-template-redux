@@ -58,3 +58,5 @@ export default class index extends Component {
   }
 }
 ```
+<br/><br/>
+Delete src/redux folder
