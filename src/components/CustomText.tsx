@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, Text, StyleProp,TextStyle} from 'react-native';
 //END OF IMPORT's
 
 
 interface componentInterface {
-    style?: StyleProp<ViewStyle>;
+    style?: StyleProp<TextStyle>;
 }//end of INTERFACE 
 
 
