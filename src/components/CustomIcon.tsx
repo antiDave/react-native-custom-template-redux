@@ -11,9 +11,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 interface CIInterface {
-	iconType: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "Foundation";
+	iconType: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "Foundation" | "SimpleLineIcons";
 	style: StyleProp<ViewStyle>;
 	name: any;
 	size: number;
@@ -56,7 +57,10 @@ export default class CustomIcon extends React.Component<CIInterface, any> {
 			return <MaterialIcons name={name} color={color} size={size} style={[style]} />;
 		} else if (iconType === 'Foundation') {
 			return <Foundation name={name} color={color} size={size} style={[style]} />;
-		} else {
+		} else if (iconType === 'SimpleLineIcons') {
+			return <SimpleLineIcons name={name} color={color} size={size} style={[style]} />;
+		}
+		else {
 			return <Ionicons name={name} color={color} size={size} style={[style]} />;
 		}
 

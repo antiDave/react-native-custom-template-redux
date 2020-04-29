@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 AntDesign.loadFont();
 Entypo.loadFont();
@@ -24,6 +25,8 @@ Ionicons.loadFont();
 MaterialCommunityIcons.loadFont();
 MaterialIcons.loadFont();
 Foundation.loadFont();
+SimpleLineIcons.loadFont();
+
 
 export default class App extends React.Component {
   constructor(props) {

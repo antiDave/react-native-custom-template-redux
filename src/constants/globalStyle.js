@@ -39,6 +39,7 @@ export default globalStyle = {
         shadowRadius: 3.84,
         elevation: 5,
         backgroundColor: 'white',
+        alignSelf: 'center',
     },
     shadow: {
         shadowColor: '#000',
@@ -49,5 +50,48 @@ export default globalStyle = {
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+    },
+    headingStyle: {
+        fontWeight: 'bold',
+        color: "#212121",
+        fontSize: fontSizes._26,
+        lineHeight: 27,
+        letterSpacing: -0.78
+    },
+    regularTitleStyle: {
+        fontWeight: 'bold',
+        color: "#212121",
+        fontSize: fontSizes._20,
+        lineHeight: 26,
+        letterSpacing: -0.6
+    },
+    cardTitleStyle: {
+        fontWeight: 'bold',
+        color: "#212121",
+        fontSize: fontSizes._16,
+        lineHeight: 24,
+        letterSpacing: -0.48,
+        marginBottom: 16
+    },
+
+    textStyle_818181: {
+        color: "#818181",
+        fontSize: fontSizes._14,
+
+    },
+    textStyle_a6a6a6: {
+        color: "#a6a6a6",
+        fontSize: fontSizes._14,
+
+    },
+    textStyle_212121: {
+        color: "#212121",
+        fontSize: fontSizes._14,
+
+    },
+    textStyle_ffffff: {
+        color: "#fff",
+        fontSize: fontSizes._14,
+
     },
 }

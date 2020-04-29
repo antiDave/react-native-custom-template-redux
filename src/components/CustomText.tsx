@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, StyleProp,TextStyle} from 'react-native';
+import { StyleSheet, Text, StyleProp, TextStyle } from 'react-native';
+import globalStyle from '../constants/globalStyle';
 //END OF IMPORT's
 
 
@@ -23,7 +24,7 @@ export default class CustomText extends Component<componentInterface, any> {
     render() {
         let { style } = this.props;
         return (
-            <Text style={[style, styles.text]}>{this.props.children}</Text>
+            <Text style={[styles.text, style]}>{this.props.children}</Text>
         )
     } // end of Function Render
 
@@ -32,5 +33,6 @@ export default class CustomText extends Component<componentInterface, any> {
 
 const styles = StyleSheet.create({
     text: {
+        ...globalStyle.textStyle_212121
     }
 }); //end of StyleSheet STYLES
