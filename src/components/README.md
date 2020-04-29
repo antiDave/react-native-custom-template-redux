@@ -45,7 +45,29 @@ const multipleIcons = [
         }
     }
 ];
+                <CustomHeader
+                    title="Title"
+                    leftIconVisible={true}
+                    leftIconName="menu"
+                    leftIconType="Entypo"
+                    leftIconPress={() => {
+                        console.log('Menu Pres');
+                    }}
+                    rightIconVisible={true}
+                    rightIconName="customerservice"
+                    rightIconType="AntDesign"
+                    rightIconPress={() => {
+                        console.log('Customer Service Press');
+                    }}
+                    optionVisible={true}
+                    optionsData={optionsData}
 
+                    searchVisible={true}
+                    rightMultiple={true}
+                    rightMultipleIcons={multipleIcons}
+                    headerBackgroundColor={"#313d4b"}
+                    statusBarBackgroundColor={"#313d4b"}
+                />
 ```
 # Custom Icon
  
