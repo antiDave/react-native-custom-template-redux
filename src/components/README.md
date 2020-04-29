@@ -46,29 +46,20 @@ const multipleIcons = [
     }
 ];
 
+```
+# Custom Icon
+ 
+How to use Custom Icon
 
+# ⚛️ Usage
 
-  <CustomHeader
-                    title="Title"
-                    leftIconVisible={true}
-                    leftIconName="menu"
-                    leftIconType="Entypo"
-                    leftIconPress={() => {
-                        console.log('Menu Pres');
-                    }}
-                    rightIconVisible={true}
-                    rightIconName="customerservice"
-                    rightIconType="AntDesign"
-                    rightIconPress={() => {
-                        console.log('Customer Service Press');
-                    }}
-                    optionVisible={true}
-                    optionsData={optionsData}
+```js
 
-                    searchVisible={true}
-                    rightMultiple={true}
-                    rightMultipleIcons={multipleIcons}
-                    headerBackgroundColor={"#313d4b"}
-                    statusBarBackgroundColor={"#313d4b"}
-                />
+<CustomIcon
+                iconType="AntDesign"
+                name="customerservice"
+                style={{margin:8}}
+                color="#212121"
+                size={20}/>
+
 ```
