@@ -34,10 +34,10 @@ This method has the advantage of fonts being copied from this module at build ti
 
 Edit android/app/build.gradle ( NOT android/build.gradle ) and add the following:
 
-``` apply from: "../../node_modules/react-native-vector-icons/fonts.gradle" ```<br/>
+```gradle apply from: "../../node_modules/react-native-vector-icons/fonts.gradle" ```<br/>
 To customize the files being copied, add the following instead:
 
-```
+```gradle
 project.ext.vectoricons = [
     iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
 ]
