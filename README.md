@@ -13,7 +13,7 @@ React, React Native, React Native Async Storeage ,React Native Masked View, Reac
 | yarn add @react-navigation/native  |
 | ------------- | 
 
-| yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo  |
+| yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  |
 | ------------- | 
 
 | yarn add react-redux redux |
