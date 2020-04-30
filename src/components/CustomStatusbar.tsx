@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
-import colors from '../constants/colors';
+
+const colors = {
+    statusbar: "#313d4b",
+}
 
 interface CSBInterface {
     translucent: boolean;
