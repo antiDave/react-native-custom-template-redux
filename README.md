@@ -83,7 +83,7 @@ export default class index extends Component {
 ```
 
 # Auto Increment Version Code and Name
-Download version.properties and place in android/app
+Download and place the version.properties file under the android/app directory in your project folder.
 <a href="https://github.com/NoumanSakhawat/react-native-custom-template-redux/raw/master/files/version.properties.zip" download="version.properties">Click to Download version.properties</a>
 
 ```gradle
