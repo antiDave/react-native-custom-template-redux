@@ -81,3 +81,94 @@ export default class index extends Component {
     }
 }
 ```
+
+# Auto Increment Version Code and Name
+```gradle
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    
+    ....
+    
+    
+//    VERSIONING CODE SETTING START
+    def versionPropsFile = file('version.properties')
+
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def oldnaming=versionProps['VERSION_NAME'].toInteger()
+
+        if(oldnaming % 100 == 0){
+            def code = versionProps['VERSION_CODE'].toInteger() + 1
+            versionProps['VERSION_CODE']=code.toString()
+
+        }
+
+        def naming=versionProps['VERSION_NAME'].toInteger() + 1
+        def codeP = versionProps['VERSION_CODE'].toInteger()
+        def center1=versionProps['VERSION_CENTER_NUMBER1'].toInteger() + 1
+
+        versionProps['VERSION_NAME']=naming.toString()
+
+        versionProps['VERSION_CENTER_NUMBER1']=center1.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        defaultConfig {
+            applicationId "com.packagename"
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            multiDexEnabled true
+            versionCode codeP
+            versionName codeP +"."+center1+"."+naming
+        }
+    }
+    else {
+        throw new GradleException("Could not read version.properties!")
+    }
+
+    //    VERSIONING CODE SETTING END
+
+
+...
+
+  splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
+    }
+```
+
+# Change APK File Name
+replace
+<br/>
+```gradle
+   def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
+           def abi = output.getFilter(OutputFile.ABI)
+           if (abi != null) {  // null for the universal-debug, universal-release variants
+               output.versionCodeOverride =
+                       versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+           }
+
+```
+<br/>
+with
+<br/>
+
+```gradle
+def outputDirPath = new     File("${project.rootDir.absolutePath}/app/build/outputs/apk/${variant.flavorName}/${variant.buildType.name}")
+            variant.packageApplicationProvider.get().outputDirectory = outputDirPath
+            def apkFileName = "APPNAME v${android.defaultConfig.versionName}.apk"
+            output.outputFileName = apkFileName
+
+```
