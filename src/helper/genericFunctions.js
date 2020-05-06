@@ -77,7 +77,7 @@ export function RandomString(length, format) {
 }
 
 export function firebaseString(length, format) {
-    const leng = length ? length : 10;
+    const leng = length ? length : 20;
     const chars = format ? format : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var result = '';
     for (var i = leng; i > 0; --i) {
