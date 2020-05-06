@@ -76,6 +76,22 @@ export function RandomString(length, format) {
 // var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 }
 
+export function firebaseString(length, format) {
+    const leng = length ? length : 10;
+    const chars = format ? format : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var result = '';
+    for (var i = leng; i > 0; --i) {
+        result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return result;
+    // Usage Example
+
+    // randomString(16, 'aA')
+    // randomString(32, '#aA')
+    // randomString(64, '#A!')
+    // var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+}
+
 
 export function titleCase(text) {
     let str = text;
