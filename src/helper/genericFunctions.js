@@ -68,13 +68,50 @@ export function RandomString(length, format) {
         result += chars[Math.floor(Math.random() * chars.length)];
     }
     return result;
-// Usage Example
+    // Usage Example
 
-// randomString(16, 'aA')
-// randomString(32, '#aA')
-// randomString(64, '#A!')
-// var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    // randomString(16, 'aA')
+    // randomString(32, '#aA')
+    // randomString(64, '#A!')
+    // var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 }
+
+export function RandomID(length, format) {
+    const leng = length ? length : 5;
+    const chars = format ? format : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var result = '';
+    for (var i = leng; i > 0; --i) {
+        result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return result;
+    // Usage Example
+
+    // randomString(16, 'aA')
+    // randomString(32, '#aA')
+    // randomString(64, '#A!')
+    // var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+}
+
+export function drawerToggle(props) {
+    props.navigation.openDrawer();
+}
+
+export function getMonthNameNumber() {
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const d = new Date();
+    return {
+        number: d.getMonth(),
+        name: months[d.getMonth()]
+    };
+}
+export function getYear() {
+    return new Date().getFullYear();
+}
+
+export function getDate() {
+    return new Date().getDate();
+}
+
 
 export function firebaseString(length, format) {
     const leng = length ? length : 20;
