@@ -10,16 +10,13 @@ React, React Native, React Native Async Storeage ,React Native Masked View, Reac
 
 # 🎉 Installation Guide! 
 
-| yarn add @react-navigation/native  |
+| yarn add @react-navigation/native @react-navigation/stack  |
 | ------------- | 
 
 | yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  |
 | ------------- | 
 
 | yarn add react-redux redux |
-| ------------- | 
-
-| yarn add @react-navigation/stack  |
 | ------------- | 
 
 | yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver |
