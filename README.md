@@ -99,7 +99,7 @@ android {
     ....
     
     
-//    VERSIONING CODE SETTING START
+ //    VERSIONING CODE SETTING START
     def versionPropsFile = file('version.properties')
 
     if (versionPropsFile.canRead()) {
@@ -115,9 +115,15 @@ android {
 
         }
 
+ if(oldnaming % 10 == 0){
+        def centerChanging=versionProps['VERSION_CENTER_NUMBER1'].toInteger() + 1   
+        versionProps['VERSION_CENTER_NUMBER1']=centerChanging.toString()   
+          }
+
         def naming=versionProps['VERSION_NAME'].toInteger() + 1
         def codeP = versionProps['VERSION_CODE'].toInteger()
-        def center1=versionProps['VERSION_CENTER_NUMBER1'].toInteger() + 1
+         def center1=versionProps['VERSION_CENTER_NUMBER1'].toInteger();
+        
 
         versionProps['VERSION_NAME']=naming.toString()
 
@@ -125,7 +131,7 @@ android {
         versionProps.store(versionPropsFile.newWriter(), null)
 
         defaultConfig {
-            applicationId "com.packagename"
+            applicationId "com.PACKAGENAME"
             minSdkVersion rootProject.ext.minSdkVersion
             targetSdkVersion rootProject.ext.targetSdkVersion
             multiDexEnabled true
