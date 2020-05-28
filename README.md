@@ -17,8 +17,8 @@ Download zip <br/> unzip in the root folder of the project
 
 # All packages without Redux
 | yarn add @react-navigation/native @react-navigation/stack && yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  && yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver  <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack && npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  && npm install react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver --save-dev  |
+# Packages 
 | ------------- | 
-
 | yarn add @react-navigation/native @react-navigation/stack  <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack  |
 | ------------- | 
 
@@ -86,7 +86,7 @@ export default class index extends Component {
 }
 ```
 
-# Auto Increment Version Code and Name
+# Auto Increment Version Code and Name for ANDROID
 Download and place the version.properties file under the android/app directory in your project folder.
 <a href="https://github.com/NoumanSakhawat/react-native-custom-template-redux/raw/master/files/version.properties.zip" download="version.properties">Click to Download version.properties</a>
 
@@ -162,7 +162,7 @@ android {
     }
 ```
 
-# Change APK File Name
+# Change APK File Name for ANDROID
 replace
 <br/>
 ```gradle
@@ -185,3 +185,16 @@ def outputDirPath = new     File("${project.rootDir.absolutePath}/app/build/outp
             output.outputFileName = apkFileName
 
 ```
+
+# Auto Increment Version Build for IOS
+In the latest version of Xcode (Version 11.1) you can do the build number auto increment fairly easily.
+
+Here are the steps:
+<ol>
+ <li>Go to your target's Build Settings </li>
+ <li>Search for Versioning System</li>
+ <li>Set it's value to Apple Generic</li>
+ <li>Go to your target's Build Phases</li>
+ <li>Add a new Run Script</li>
+ <li>Add the following line agvtool next-version -all </li>
+ </ol>
