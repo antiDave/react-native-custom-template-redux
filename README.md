@@ -17,8 +17,9 @@ Download zip <br/> unzip in the root folder of the project
 
 # All packages without Redux
 | yarn add @react-navigation/native @react-navigation/stack && yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  && yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver  <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack && npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  && npm install react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver --save-dev  |
-# Packages 
 | ------------- | 
+
+# Packages 
 | yarn add @react-navigation/native @react-navigation/stack  <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack  |
 | ------------- | 
 
@@ -191,10 +192,10 @@ In the latest version of Xcode (Version 11.1) you can do the build number auto i
 
 Here are the steps:
 <ol>
- <li>Go to your target's Build Settings </li>
- <li>Search for Versioning System</li>
- <li>Set it's value to Apple Generic</li>
- <li>Go to your target's Build Phases</li>
+ <li>Go to your target's <b>Build Settings</b> </li>
+ <li>Search for <b>Versioning System</b></li>
+ <li>Set it's value to <b>Apple Generic</b></li>
+ <li>Go to your target's <b>Build Phases</b></li>
  <li>Add a new Run Script</li>
- <li>Add the following line agvtool next-version -all </li>
+ <li>Add the following line <b>agvtool next-version -all </b> </li>
  </ol>
