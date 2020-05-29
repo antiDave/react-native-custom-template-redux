@@ -1,14 +1,10 @@
+//@ts-ignore
 import * as React from "react";
-import {
-    NativeSyntheticEvent,
-    StyleSheet,
-    TextInput,
-    TextInputFocusEventData,
-    TextInputProps,
-    View
-} from "react-native";
+//@ts-ignore
+import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputFocusEventData, TextInputProps, View } from "react-native";
 import CustomText from "./CustomText";
 import { emptyValidate } from "../helper/genericFunctions";
+import { marginSizesWidth } from "../constants/sizes";
 
 interface State {
     isFocused?: boolean;
@@ -84,7 +80,7 @@ export default class CustomTextInput extends React.Component<allInterface, any> 
 const styles = StyleSheet.create({
     textInput: {
         height: "auto",
-        paddingHorizontal: 16,
+        paddingHorizontal: marginSizesWidth._16,
         borderWidth: 2,
         borderRadius: 5,
     }

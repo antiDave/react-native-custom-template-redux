@@ -1,6 +1,9 @@
+//@ts-ignore
 import React, { Component } from 'react';
+//@ts-ignore
 import { StyleSheet, View, TouchableOpacity, StyleProp, TouchableOpacityProps, ViewStyle, TextStyle, } from 'react-native';
 import Text from './CustomText';
+import { fontSizes } from '../constants/sizes';
 //END OF IMPORT's
 
 
@@ -40,8 +43,8 @@ export default class CustomButton extends Component<allInterface, any> {
     };//end of DEFAULT PROPS DECLARATION
 
     render() {
-        let { styleButton, textStyle, title, disabled, mode, backgroundColor, textColor,
-            ...OtherProps } = this.props;
+        //@ts-ignore
+        let { styleButton, textStyle, title, disabled, mode, backgroundColor, textColor, ...OtherProps } = this.props;
         return (
             <TouchableOpacity disabled={disabled} style={[styles.button, styleButton, {
                 backgroundColor: disabled ? colors.backgroundDisable : mode === "default" ? backgroundColor : backgroundColor !== colors.background ? backgroundColor : colors.backgroundTransparent
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: 16,
+        fontSize: fontSizes._16,
         textTransform: 'uppercase',
         // color: '#FFFFFF',
     },
