@@ -8,23 +8,31 @@ This is an open source template of react-native library maintained by facebook. 
 # Stack Project:
 React, React Native, React Native Async Storeage ,React Native Masked View, React Navigation, React Navigation Stack, Moment, React Native Device Info, React Native Dotenv, React Native Gesture Hanfler, React Native Reanimated, React Native Responsive Dimesions, React Native Safe Area Content, React Native Screens, React Native Svg, React Native Svg Transformer, React Native Vector Icons, React Native Netinfo, React Redux, Redux
 
+# ⚛️ Usage
+
+Download zip <br/> unzip in the root folder of the project
+ 
+
 # 🎉 Installation Guide! 
 
-| yarn add @react-navigation/native @react-navigation/stack  |
+# All packages without Redux
+| yarn add @react-navigation/native @react-navigation/stack && yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  && yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver  <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack && npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  && npm install react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver --save-dev  |
 | ------------- | 
 
-| yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  |
+# Packages 
+| yarn add @react-navigation/native @react-navigation/stack  <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack  |
 | ------------- | 
 
-| yarn add react-redux redux |
+
+| yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  <h4>using npm</h4> npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage |
 | ------------- | 
 
-| yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver |
+| yarn add react-redux redux  <h4>using npm</h4> npm install react-redux redux |
 | ------------- | 
 
-# Without Redux all packages 
-| yarn add @react-navigation/native @react-navigation/stack && yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage  && yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver |
+| yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver  <h4>using npm</h4> npm install react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver --save-dev |
 | ------------- | 
+
 
 |If you are using Mac| 
 | ------------- | 
@@ -48,10 +56,6 @@ project.ext.vectoricons = [
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 ```
-
-# ⚛️ Usage
-
-Download zip <br/> unzip in the root folder of the project
 
 # How to Remove Redux from Project 
 Remove in src/routes/index.js <br/> line# 4, 5, 20, 26
@@ -83,7 +87,7 @@ export default class index extends Component {
 }
 ```
 
-# Auto Increment Version Code and Name
+# Auto Increment Version Code and Name for ANDROID
 Download and place the version.properties file under the android/app directory in your project folder.
 <a href="https://github.com/NoumanSakhawat/react-native-custom-template-redux/raw/master/files/version.properties.zip" download="version.properties">Click to Download version.properties</a>
 
@@ -159,7 +163,7 @@ android {
     }
 ```
 
-# Change APK File Name
+# Change APK File Name for ANDROID
 replace
 <br/>
 ```gradle
@@ -182,3 +186,16 @@ def outputDirPath = new     File("${project.rootDir.absolutePath}/app/build/outp
             output.outputFileName = apkFileName
 
 ```
+
+# Auto Increment Version Build for IOS
+In the latest version of Xcode (Version 11.1) you can do the build number auto increment fairly easily.
+
+Here are the steps:
+<ol>
+ <li>Go to your target's <b>Build Settings</b> </li>
+ <li>Search for <b>Versioning System</b></li>
+ <li>Set it's value to <b>Apple Generic</b></li>
+ <li>Go to your target's <b>Build Phases</b></li>
+ <li>Add a new Run Script</li>
+ <li>Add the following line <b>agvtool next-version -all </b> </li>
+ </ol>
