@@ -1,248 +1,232 @@
-import { ENVIRONMENT, DEV_API_URL, PROD_API_URL } from 'react-native-dotenv';
-import ErrorSnackBar from './ErrorSnackBar';
-import { InternetCheck } from './InternetCheck';
-import ExcludeCode from './ExcludeCode';
-import { Language } from '../App/GlobalVariables/global';
+import { DEV_API_URL, ENVIRONMENT, PROD_API_URL } from 'react-native-dotenv';
+import RNFetchBlob from 'rn-fetch-blob';
+import { emptyValidate } from '../helper/genericFunctions';
+import { Language } from '../locales';
 
-export const _fetchGet = (classes, header) => {
-	return new Promise(async resolve => {
-		const internet = await InternetCheck();
-		if (!internet) {
-			resolve(undefined);
-			return;
-		}
+import { InternetCheck } from '../utils/InternetConnection';
 
-		const urlHeader = await urlHeaderCreation(classes, header);
+let cancelUpload = null;
 
-		fetch(urlHeader.url, {
-			method: 'GET',
-			headers: urlHeader.header,
-		})
-			.then(response => response.json())
-			.then(async responseJson => {
-				const res = await appCodeErrorHandle(classes, responseJson);
-				resolve(res);
-			})
-			.catch(error => {
-				catchErrorHandle(classes, error);
+const apiManager = {
+	GET(classes, header, json = false) {
+		return new Promise(async resolve => {
+			const internet = await InternetCheck();
+			if (!internet) {
 				resolve(undefined);
-			}); //end of fetch
-	}); //end of Promise
-}; //end of _fetchGet
+				return;
+			}
 
-export const _fetchPost = (classes, header, param, json = false) => {
-	return new Promise(async resolve => {
-		const internet = await InternetCheck();
-		if (!internet) {
-			resolve(undefined);
-			return;
-		}
+			const urlHeader = await urlHeaderCreation(classes, header);
 
-		const urlHeader = await urlHeaderCreation(classes, header);
-		console.warn('URL HEADER FETCH POST', urlHeader);
-
-		fetch(urlHeader.url, {
-			method: 'POST',
-			headers: urlHeader.header,
-			body: JSON.stringify(param),
-		})
-			.then(response => response.json())
-			.then(async responseJson => {
-				const res = await appCodeErrorHandle(classes, responseJson);
-				resolve(res);
+			fetch(urlHeader.url, {
+				method: 'GET',
+				headers: urlHeader.header,
 			})
-			.catch(error => {
-				if (!json) {
-					catchErrorHandle(classes, error);
-				}
+				.then(response => response.json())
+				.then(async responseJson => {
+					console.log('GET RESPONSE ' + classes.toUpperCase() + "\n" + JSON.stringify(responseJson));
 
-				resolve(undefined);
-			}); //end of fetch
-	}); //end of Promise
-}; //end of _fetchPost
-
-export const _fetchPut = (classes, header, param, json = false) => {
-	return new Promise(async resolve => {
-		const internet = await InternetCheck();
-		if (!internet) {
-			resolve(undefined);
-			return;
-		}
-
-		const urlHeader = await urlHeaderCreation(classes, header);
-
-		fetch(urlHeader.url, {
-			method: 'PUT',
-			headers: urlHeader.header,
-			body: JSON.stringify(param),
-		})
-			.then(response => response.json())
-			.then(async responseJson => {
-				const res = await appCodeErrorHandle(classes, responseJson);
-				resolve(res);
-			})
-			.catch(error => {
-				if (!json) {
-					catchErrorHandle(classes, error);
-				}
-				resolve(undefined);
-			}); //end of fetch
-	}); //end of Promise
-}; //end of _fetchPut
-
-export const _uploadFile = (classes, header, param, type, json = false) => {
-	return new Promise(async resolve => {
-		const internet = await InternetCheck();
-		if (!internet) {
-			resolve(undefined);
-			return;
-		}
-
-		let url = apiUrl + classes;
-		const body = await bodyCreationFileUpload(param);
-		if (!body) {
-			resolve(undefined);
-			return;
-		}
-
-		let type_ = "post";
-		if (type) {
-			type_ = type;
-		}
-		let uploadResponse = await upload(url, header, body, type_);
-
-		resolve(uploadResponse)
-
-
-
-	}); //end of Promise
-}; //end of _uploadFile
-
-function upload(url, header, body, method) {
-	return new Promise(async (resolve) => {
-		fetch(url,
-			{
-				method: method.toUpperCase(),
-				headers: header,
-				body: body
-			})
-			.then((response) => response.json())
-			.then((responseJson) => {
-				if (responseJson.meta.errCode === 0) {
-					console.warn(' Reposnse \n' + JSON.stringify(responseJson.data));
-					resolve(responseJson.data);
-				}
-				else {
-					if (responseJson.meta.errCode === 1101) {
-						resolve();
-						ErrorSnackBar('Api not found!', '');
-						return;
+					const res = await appCodeErrorHandle(classes, responseJson);
+					resolve(res);
+				})
+				.catch(error => {
+					if (!json) {
+						catchErrorHandle(classes, error);
 					}
-					console.warn(' Error \n' + JSON.stringify(responseJson.meta));
-					resolve();
-					let e = responseJson.meta.errTranslate;
-					if (e === null || e === undefined || e === 'null' || e === 'undefined') {
-						e = responseJson.meta.errMsg;
-					}
-					ErrorSnackBar(e, '');
-					return;
-				}
+					console.log('ERROR', error);
+					resolve(undefined);
+				}); //end of fetch
+		}); //end of Promise
+	}, //end of _fetchGet
+
+	POST(classes, param, header, json = false) {
+		return new Promise(async resolve => {
+			const internet = await InternetCheck();
+			if (!internet) {
+				resolve(undefined);
+				return;
+			}
+
+			const urlHeader = await urlHeaderCreation(classes, header);
+			fetch(urlHeader.url, {
+				method: 'POST',
+				headers: urlHeader.header,
+				body: JSON.stringify(param),
 			})
-			.catch((error) => {
-				if (error.toString().includes('Error: Request failed with status code 401')) {
-					resolve();
-					ErrorSnackBar('Api not found!', '');
-					return;
-				}
-				else {
-					console.warn(' UploadImage Error By Catch==>\n' + error);
-					resolve();
-					ErrorSnackBar(error.toString(), '');
-					return;
-				}
-			});
-	})
+				.then(response => response.json())
+				.then(async responseJson => {
+					console.log('POST RESPONSE ' + classes.toUpperCase() + "\n" + JSON.stringify(responseJson));
+					const res = await appCodeErrorHandle(classes, responseJson);
+					resolve(res);
+				})
+				.catch(error => {
+					if (!json) {
+						catchErrorHandle(classes, error);
+					}
 
-}
+					console.log('ERROR', error);
+
+					resolve(undefined);
+				}); //end of fetch
+		}); //end of Promise
+	},//end of _fetchPost
+
+	PUT(classes, param, header, json = false) {
+		return new Promise(async resolve => {
+			const internet = await InternetCheck();
+			if (!internet) {
+				resolve(undefined);
+				return;
+			}
+
+			const urlHeader = await urlHeaderCreation(classes, header);
+
+			fetch(urlHeader.url, {
+				method: 'PUT',
+				headers: urlHeader.header,
+				body: JSON.stringify(param),
+			})
+				.then(response => response.json())
+				.then(async responseJson => {
+					console.log('PUT RESPONSE ' + classes.toUpperCase() + "\n" + JSON.stringify(responseJson));
+					const res = await appCodeErrorHandle(classes, responseJson);
+					resolve(res);
+				})
+				.catch(error => {
+					if (!json) {
+						catchErrorHandle(classes, error);
+					}
+					console.log('ERROR', error);
+					resolve(undefined);
+				}); //end of fetch
+		}); //end of Promise
+	}, //end of _fetchPut
+
+	POSTIMAGE(classes, param, base64, header, json = false) {
+		return new Promise(async (resolve) => {
+			const internet = await InternetCheck();
+			if (!internet) {
+				resolve(undefined);
+				return;
+			}
+
+			const urlHeader = await urlHeaderCreation(classes, header);
+			urlHeader.header['Content-Type'] = 'multipart/form-data';
+			urlHeader.header["Authorization"] = "Bearer access-token";
+			urlHeader.header["otherHeader"] = "foo";
+
+			console.warn('urlHeader.header', urlHeader.header);
+
+			let dataaaaaa = [
+				{ name: 'image', filename: 'avatar-png.png', type: 'image/png', data: base64 }
+			];
+
+			cancelUpload = RNFetchBlob.fetch('POST', urlHeader.url, urlHeader.header, dataaaaaa);
+			cancelUpload.uploadProgress((written, total) => {
+				console.log('POST IMAGE uploaded', written / total)
+			})
+				// listen to download progress event
+				.progress((received, total) => {
+					// console.log('POST IMAGE progress', received / total)
+				}).then((res) => res.json())
+				.then((res) => {
+					// console.warn('POST IMAGE  THEN\n', res);
+					resolve(res);
+				}).catch((err) => {
+					if (err.message.includes("canceled")) {
+						resolve("abort");
+						return "abort";
+					}
+					console.warn('POST IMAGE  CATCH\n', err);
+					resolve(undefined);
+				})
+		}); //end of Promise
+	},//end of UPLOAD_IMAGE
 
 
-function bodyCreationFileUpload(param) {
-	return new Promise(async (resolve) => {
 
-		let uri = param.hasOwnProperty("uri");
-		let name = param.hasOwnProperty("name");
-		let filename = param.hasOwnProperty("filename");
-		let type = param.hasOwnProperty("type");
-		let Content_Type = param.hasOwnProperty("Content-Type");
+	UPLOADMULTIPART(classes, param, header, json = false) {
+		return new Promise(async (resolve) => {
+			const internet = await InternetCheck();
+			if (!internet) {
+				resolve(undefined);
+				return;
+			}
 
-		if (!uri) {
-			console.error('Please Enter bodyCreationFileUpload uri');
-			resolve(false);
-			return;
+
+			const urlHeader = await urlHeaderCreation(classes, header);
+			urlHeader.header['Content-Type'] = 'multipart/form-data';
+			urlHeader.header["Authorization"] = "Bearer access-token";
+			urlHeader.header["otherHeader"] = "foo";
+
+			console.warn("HEADER", urlHeader.header);
+
+
+			fetch(urlHeader.url,
+				{
+					method: 'POST',
+					headers: urlHeader.header,
+					body: param
+				})
+				.then((response) => response.json())
+				.then(async (responseJson) => {
+
+					resolve(responseJson);
+
+				})
+				.catch((error) => {
+					if (!json) {
+						catchErrorHandle(classes, error);
+					}
+					console.log('ERROR', error);
+					resolve(undefined);
+				});
+
+
+		}); //end of Promise
+	},//end of UPLOADMULTIPART
+
+	CANCELUPLOAD() {
+
+		if (cancelUpload !== null) {
+			cancelUpload.cancel((err) => {
+				console.warn('CANCEL WHILE UPLOADING\n', err);
+			})
 		}
-		else if (!name) {
-			console.error('Please Enter bodyCreationFileUpload name');
-			resolve(false);
-			return;
-		}
-		else if (!filename) {
-			console.error('Please Enter bodyCreationFileUpload filename');
-			resolve(false);
-			return;
-		}
-		else if (!type) {
-			console.error('Please Enter bodyCreationFileUpload type');
-			resolve(false);
-			return;
-		}
-		else if (!Content_Type) {
-			console.error('Please Enter bodyCreationFileUpload Content-Type');
-			resolve(false);
-			return;
-		}
+	},//end of CANCEL_UPLOAD
 
-		uri = param.uri
-		name = param.name
-		filename = param.filename
-		type = param.type
-		Content_Type = param["Content-Type"];
+	CANCELALL() {
+		if (cancelALL !== null) {
+
+		}
+	},//end of CANCEL_ALL
 
 
-		let body = new FormData();
-		body.append('file', { uri: uri, name: name, filename: filename, type: type });
-		body.append('Content-Type', Content_Type);
-		resolve(body);
-		return;
-	})
+}//end of API MANAGER
 
-}
+export default apiManager;
+
+
+
 
 function appCodeErrorHandle(classes, response) {
 	return new Promise(resolve => {
 		//Handling Custom ERROR CODE
-		if (response.meta.errCode === 1101) {
-			resolve(undefined);
-			ErrorSnackBar('Api not found!', '');
-			return;
+
+		if (response.meta.errCode === 200) {
+			resolve(response.data);
 		}
-
-		//   **********************************************************************
-
-		if (ExcludeCode.includes(response.meta.errCode)) {
-			console.log(classes.toUpperCase() + ' Reposnse \n' + JSON.stringify(response));
-
-			resolve(response);
-		} //Exluded code if end
 		else {
-			console.log(classes.toUpperCase() + ' Error \n' + JSON.stringify(response.meta));
-			resolve(undefined);
-			let e = Language[response.meta.errTranslate];
+			if (emptyValidate(response.meta.message)) {
 
-			if (e === null || e === undefined || e === 'null' || e === 'undefined') {
-				e = response.meta.errMsg;
+				console.log(response.meta.message);
+
 			}
-			ErrorSnackBar(e, '');
+			resolve(undefined);
 		}
+
+		return;
+
 	});
 }
 
@@ -250,12 +234,21 @@ async function catchErrorHandle(classes, error) {
 	return new Promise(resolve => {
 		if (error.toString().includes('Error: Request failed with status code 401')) {
 			resolve(undefined);
-			ErrorSnackBar('Api not found!', '');
+
 			return;
 		} else {
 			console.log(classes.toUpperCase() + ' Error By Catch==>\n' + error);
+			if (error.message.includes("JSON Parse error: Unrecognized token '<'")) {
+				resolve(undefined);
+
+				console.log(error.toString(), '');
+				return;
+			}
+
+
 			resolve(undefined);
-			ErrorSnackBar(error.toString(), '');
+
+			console.log(error.toString(), '');
 			return;
 		}
 	});
@@ -269,12 +262,15 @@ function urlHeaderCreation(classes, header) {
 
 		if (!!classes) {
 			if (ENVIRONMENT == 'production') {
+				// console.log('PROD_API_URL USING URL HEADER CREATION', PROD_API_URL);
+
 				url_ = PROD_API_URL + classes
 			}
 			else {
+				// console.log('DEV_API_URL', DEV_API_URL);
 				url_ = DEV_API_URL + classes
 			}
-			console.warn('URL==>\n', url_);
+
 
 			header_ = {
 				Accept: 'application/json',
@@ -293,7 +289,7 @@ function urlHeaderCreation(classes, header) {
 
 			resolve(response);
 		} else {
-			ErrorSnackBar('API url is not valid!');
+			console.log('API url is not valid!');
 			resolve();
 		}
 	});

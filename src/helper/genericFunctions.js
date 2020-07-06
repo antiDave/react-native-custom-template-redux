@@ -142,4 +142,16 @@ export function titleCase(text) {
     return splitStr.join(' ');
 }
 
+export function upperCase(text) {
+    return text.toUpperCase();
+}
+
+export function lowerCase(text) {
+    return text.toLowerCase();
+}
+
+export function removeAllSpaces(text) {
+    return text.replace(/\s/g, '')
+
+}
 

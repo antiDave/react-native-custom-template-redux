@@ -65,7 +65,7 @@ const socialFunctions = {
     },//end of SIGNIN_GOOGLE
     signInFacebook() {
         return new Promise((resolve) => {
-            LoginManager.logInWithPermissions(["public_profile"]).then(
+            LoginManager.logInWithPermissions(["public_profile", "email"]).then(
                 function (result) {
                     if (result.isCancelled) {
                         console.log("Login cancelled");
@@ -91,7 +91,7 @@ const socialFunctions = {
 
     },//end of SIGNIN_FACEBOOK
     getFirebaseCurrentUser() {
-        return new Promise(async (resolve, ) => {
+        return new Promise(async (resolve,) => {
 
             const res = await getFirebaseCurrentUser();
             resolve(res);
@@ -130,12 +130,17 @@ const socialFunctions = {
     googleLogout() {
         return new Promise(async (resolve) => {
             const user = await getFirebaseCurrentUser();
+            console.warn('GOOGLE USER', user);
+
 
             if (user) {
-                auth().signOut().then(async () => {
+                firebase.auth().signOut().then(async () => {
+                    console.warn('GOOGLE SIGNOUT1');
+                    await GoogleSignin.revokeAccess().then(() => { }).catch((error) => { console.warn('REVOKE CATCH ERROR\n', error); });
+                    console.warn('GOOGLE SIGNOUT1 revokeAccess');
+                    await GoogleSignin.signOut().then(() => { }).catch((error) => { console.warn('SIGNOUT CATCH ERROR\n', error); });
+                    console.warn('GOOGLE SIGNOUT1 signOut');
                     console.log('User signed out!');
-                    await GoogleSignin.revokeAccess();
-                    await GoogleSignin.signOut();
                     resolve(true);
                 }).catch((error) => {
                     resolve(false);
@@ -143,6 +148,7 @@ const socialFunctions = {
             }
             else {
                 resolve(false);
+
                 alert("Already Logout!");
             }
         })//end of PROMISE
@@ -179,7 +185,7 @@ const fetchFacebookProfile = async (data) => {
 }
 
 const getFirebaseCurrentUser = () => {
-    return new Promise((resolve, ) => {
+    return new Promise((resolve,) => {
         auth().onAuthStateChanged(function (user) {
             resolve(user);
         })
@@ -189,9 +195,9 @@ const getFirebaseCurrentUser = () => {
 const _configureGoogleSignIn = () => {
     GoogleSignin.configure({
         //IOS CLIENT ID FROM FIREBASE
-        iosClientId: 'ID HERE.apps.googleusercontent.com',
+        iosClientId: '802999887589-ij24l3ki4v6akipregbpm6k3g26q2fd3.apps.googleusercontent.com',
         //WEB CLIENT ID FROM FIREBASE
-        webClientId: 'ID HERE.apps.googleusercontent.com',
+        webClientId: '802999887589-pq45djhq2lqquji74lkqs120t0vj1n1v.apps.googleusercontent.com',
         offlineAccess: false,
     });
 }

@@ -1,9 +1,10 @@
 export const Regex = {
     emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))(\s*)$/,
     verficationCodw: /^\s*[a-z|A-Z|0-9|\s]{6}\s*$/,
-    password: /^(?=.*\d).{6,100}$/,
-    numberOnly: /^\d+$/,
-    numberWithBackSlash: /^[0-9|/]+$/,
+    passwordHard: /^(?=.*\d).{8,100}$/,
+    password: /^.{8,}$/,
+    numberOnly: /^\d*$/,
+    numberWithBackSlash: /^[0-9|/]*$/,
 }
 
 export class RegexValidator {
@@ -17,6 +18,13 @@ export class RegexValidator {
     password = text => {
         return new Promise(async (resolve) => {
             const res = validator(Regex.password, text);
+            resolve(res);
+        })
+    }
+
+    numberOnly = text => {
+        return new Promise(async (resolve) => {
+            const res = validator(Regex.numberOnly, text);
             resolve(res);
         })
     }

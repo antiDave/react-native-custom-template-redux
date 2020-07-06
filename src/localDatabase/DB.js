@@ -3,9 +3,9 @@ import SQLite from "react-native-sqlite-storage";
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
-const database_name = "PicknDrop.db";
-const database_version = "3.0";
-const database_displayname = "Pick and Drop";
+const database_name = "realtoroo.db";
+const database_version = "1.0";
+const database_displayname = "Realtoroo";
 const database_size = 200000;
 
 function initDB() {
@@ -106,6 +106,7 @@ export const tableCheck = (tableName) => {
                         `SELECT name FROM sqlite_master WHERE type='table' AND name='${tableName}'`
                     ).then(([tx, results]) => {
                         var len = results.rows.length;
+
                         resolve(len);
                     });
                 })
@@ -214,7 +215,29 @@ export const recordFetch = (query) => {
     });
 };
 
+export const deleteTable = (tableName) => {
+    return new Promise(resolve => {
+        initDB()
+            .then(db => {
+                db.transaction(async tx => {
+                    tx.executeSql(`DROP TABLE IF EXISTS ${tableName}`);
 
+                    resolve(true);
+                })
+                    .then(result => {
+                        closeDatabase(db);
+                    })
+                    .catch(err => {
+                        resolve(false);
+                        console.log(err);
+                    });
+            })
+            .catch(err => {
+                resolve(false);
+                console.log(err);
+            });
+    });
+};
 export const clearDB = (tableName) => {
     return new Promise(resolve => {
         initDB()
@@ -239,3 +262,15 @@ export const clearDB = (tableName) => {
     });
 };
 
+
+export const deleteDatabase = () => {
+    return new Promise(resolve => {
+        SQLite.deleteDatabase({
+            name: database_name,
+            location: "default",
+        }, function (res) {
+            console.log(res); //database removed                              
+        });
+        resolve();
+    })//end of PROMISE
+}
