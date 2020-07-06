@@ -195,9 +195,9 @@ const getFirebaseCurrentUser = () => {
 const _configureGoogleSignIn = () => {
     GoogleSignin.configure({
         //IOS CLIENT ID FROM FIREBASE
-        iosClientId: '802999887589-ij24l3ki4v6akipregbpm6k3g26q2fd3.apps.googleusercontent.com',
+        iosClientId: 'CLIENT_ID',
         //WEB CLIENT ID FROM FIREBASE
-        webClientId: '802999887589-pq45djhq2lqquji74lkqs120t0vj1n1v.apps.googleusercontent.com',
+        webClientId: 'CLIENT_ID',
         offlineAccess: false,
     });
 }
