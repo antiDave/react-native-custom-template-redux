@@ -1,8 +1,6 @@
 import { DEV_API_URL, ENVIRONMENT, PROD_API_URL } from 'react-native-dotenv';
 import RNFetchBlob from 'rn-fetch-blob';
 import { emptyValidate } from '../helper/genericFunctions';
-import { Language } from '../locales';
-
 import { InternetCheck } from '../utils/InternetConnection';
 
 let cancelUpload = null;
