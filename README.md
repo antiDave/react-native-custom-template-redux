@@ -114,13 +114,13 @@ android {
 
         def oldnaming=versionProps['VERSION_NAME'].toInteger()
 
-        if(oldnaming % 100 == 0){
+        if(oldnaming % 10 == 0){
             def code = versionProps['VERSION_CODE'].toInteger() + 1
             versionProps['VERSION_CODE']=code.toString()
 
         }
 
- if(oldnaming % 10 == 0){
+ if(oldnaming % 2 == 0){
         def centerChanging=versionProps['VERSION_CENTER_NUMBER1'].toInteger() + 1   
         versionProps['VERSION_CENTER_NUMBER1']=centerChanging.toString()   
           }
