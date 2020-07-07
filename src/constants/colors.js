@@ -23,7 +23,6 @@ export default {
     textFFFFFF: "#ffffff",
     metallicGray: '#919191',
     divider: "#919191",
-    primary: '#4357AE',
     white: "#ffffff",
     red: "red",
     blue: "blue",
