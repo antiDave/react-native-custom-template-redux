@@ -18,7 +18,7 @@ export default {
     metallicGray: '#919191',
     divider: "#919191",
     primary: '#4357AE',
-    white: "#fffff",
+    white: "#ffffff",
     red: "red",
     blue: "blue",
     black: "#000000",
