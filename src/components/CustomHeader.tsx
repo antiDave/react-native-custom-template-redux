@@ -4,53 +4,65 @@ import { fontSizes, marginSizesHeight, marginSizesWidth } from "../constants/siz
 import CustomIcon from "./CustomIcon";
 import Text from "./CustomText";
 import { emptyValidate } from "../helper/genericFunctions";
+import globalColors from "../constants/colors";
+import { Language } from "../locales";
 
 const colors = {
-    statusbar: "#313d4b",
-    background: "#f7f7f7",
-    header: "#313d4b",
-    white: "#fff",
-    transparent: "transparent",
-    heading: "#000000",
-    divider: "#E5E5E5",
-    actionButton: "#fc5356",
-    actionButton0: "rgba(231,76,60,1)",
-    actionButton1: '#9b59b6',
-    actionButton2: 'rgba(252, 83, 86, 1)',
+    statusbar: globalColors.statusbar,
+    background: globalColors.background,
+    header: globalColors.header,
+    white: globalColors.white,
+    black: globalColors.black,
+    primary: globalColors.primary,
+    transparent: globalColors.transparent,
+    heading: globalColors.heading,
+    divider: globalColors.divider,
+    headerBottomColor: globalColors.headerBottomColor
+    // statusbar: "#313d4b",
+    // background: "#f7f7f7",
+    // header: "#313d4b",
+    // white: "#fff",
+    // transparent: "transparent",
+    // heading: "#000000",
+    // divider: "#E5E5E5",
+    // actionButton: "#fc5356",
+    // actionButton0: "rgba(231,76,60,1)",
+    // actionButton1: '#9b59b6',
+    // actionButton2: 'rgba(252, 83, 86, 1)',
 }
 
 interface CustomHeaderInterface {
-    style: StyleProp<ViewStyle>;
-    statusBarStyle: "dark-content" | "light-content" | "default";
-    statusBarBackgroundColor: string;
-    headerBackgroundColor: string;
-    containerStyle: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
+    statusBarStyle?: "dark-content" | "light-content" | "default";
+    statusBarBackgroundColor?: string;
+    headerBackgroundColor?: string;
+    containerStyle?: StyleProp<ViewStyle>;
 
-    leftIconType: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
-    leftIconStyle: StyleProp<ViewStyle>;
-    leftIconName: any;
-    leftIconSize: number;
-    leftIconColor: any;
+    leftIconType?: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
+    leftIconStyle?: StyleProp<ViewStyle>;
+    leftIconName?: any;
+    leftIconSize?: number;
+    leftIconColor?: any;
 
-    rightIconType: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
-    rightIconStyle: StyleProp<ViewStyle>;
-    rightIconName: any;
-    rightIconSize: number;
-    rightIconColor: any;
+    rightIconType?: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
+    rightIconStyle?: StyleProp<ViewStyle>;
+    rightIconName?: any;
+    rightIconSize?: number;
+    rightIconColor?: any;
 
-    leftIconContainerStyle: StyleProp<ViewStyle>;
-    rightIconContainerStyle: StyleProp<ViewStyle>;
-    titleContainerStyle: StyleProp<ViewStyle>;
-    titleStyle: StyleProp<TextStyle>;
-    title: any;
-    navigation: any;
-    leftIconVisible: boolean;
-    rightIconVisible: boolean;
+    leftIconContainerStyle?: StyleProp<ViewStyle>;
+    rightIconContainerStyle?: StyleProp<ViewStyle>;
+    titleContainerStyle?: StyleProp<ViewStyle>;
+    titleStyle?: StyleProp<TextStyle>;
+    title?: any;
+    navigation?: any;
+    leftIconVisible?: boolean;
+    rightIconVisible?: boolean;
 
     leftIconPress(): any;
     rightIconPress(): any;
 
-    rightMultiple: boolean;
+    rightMultiple?: boolean;
 
     rightMultipleIcons?: [
         {
@@ -63,12 +75,12 @@ interface CustomHeaderInterface {
             onPress(): any;
         }
     ],
-    optionVisible: boolean;
-    optionIconType: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
-    optionIconStyle: StyleProp<ViewStyle>;
-    optionIconName: any;
-    optionIconSize: number;
-    optionIconColor: any;
+    optionVisible?: boolean;
+    optionIconType?: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
+    optionIconStyle?: StyleProp<ViewStyle>;
+    optionIconName?: any;
+    optionIconSize?: number;
+    optionIconColor?: any;
     optionsData?: [
         {
             id: number,
@@ -77,15 +89,22 @@ interface CustomHeaderInterface {
         }
     ];
 
-    searchVisible: boolean;
-    searchIconType: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
-    searchIconStyle: StyleProp<ViewStyle>;
-    searchIconName: any;
-    searchIconSize: number;
-    searchIconColor: any;
+    searchVisible?: boolean;
+    searchIconType?: 'Ionicons' | 'AntDesign' | 'Entypo' | 'EvilIcons' | 'Feather' | 'FontAwesome' | 'Fontisto' | 'MaterialCommunityIcons' | 'MaterialIcons' | "SimpleLineIcons";
+    searchIconStyle?: StyleProp<ViewStyle>;
+    searchIconName?: any;
+    searchIconSize?: number;
+    searchIconColor?: any;
 
     onChangeText(text: any): any;
-    searchRightIconVisible: boolean;
+    searchRightIconVisible?: boolean;
+
+    bottomLine?: boolean;
+
+    rightTextVisible?: boolean;
+    rightText?: any;
+    rightTextStyle?: StyleProp<TextStyle>;
+    rightTextPress(): any,
 
 }
 
@@ -102,13 +121,13 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
 
         leftIconType: 'Ionicons',
         leftIconName: 'md-arrow-back',
-        leftIconColor: colors.white,
+        leftIconColor: colors.primary,
         leftIconSize: 30,
         leftIconStyle: {},
 
         rightIconType: 'Ionicons',
         rightIconName: 'md-search',
-        rightIconColor: colors.white,
+        rightIconColor: colors.primary,
         rightIconSize: 30,
         rightIconStyle: {},
 
@@ -129,17 +148,25 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
         optionIconStyle: {},
         optionIconName: 'options-vertical',
         optionIconSize: 25,
-        optionIconColor: colors.white,
+        optionIconColor: colors.primary,
 
         searchVisible: false,
         searchIconType: 'Ionicons',
         searchIconStyle: {},
         searchIconName: 'md-search',
         searchIconSize: 30,
-        searchIconColor: colors.white,
+        searchIconColor: colors.primary,
 
         onChangeText(text: any) { },
         searchRightIconVisible: false,
+
+        bottomLine: false,
+
+        rightTextVisible: false,
+        rightText: "",
+
+        rightTextPress() { },
+
     };
 
     constructor(props: CustomHeaderInterface) {
@@ -194,15 +221,24 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
         let { statusBarStyle, statusBarBackgroundColor, headerBackgroundColor, containerStyle, style, leftIconColor, leftIconName, leftIconSize, leftIconStyle, leftIconType,
             leftIconContainerStyle, rightIconContainerStyle, titleContainerStyle, titleStyle, title, rightIconColor, rightIconName, rightIconSize, rightIconStyle, rightIconType,
             leftIconPress, rightIconPress, leftIconVisible, rightIconVisible, rightMultiple,
-            optionVisible, searchVisible } = this.props;
+            optionVisible, searchVisible, bottomLine, rightTextVisible, rightText, rightTextStyle, rightTextPress } = this.props;
 
         if (title.length > 20) {
             title = `${title.substring(0, 20)}...`
         }
 
+        if (statusBarBackgroundColor === "#fff" || statusBarBackgroundColor === "#ffffff" || statusBarBackgroundColor === "white") {
+            statusBarStyle = "dark-content";
+        }
 
         return (
-            <View style={[containerStyle, { ...styles.container }]} onLayout={this.onLayout}>
+            <View style={[containerStyle, {
+                ...styles.container,
+                borderBottomWidth: bottomLine ? 1.5 : 0,
+                borderBottomColor: colors.headerBottomColor
+            },
+
+            ]} onLayout={this.onLayout}>
                 <SafeAreaView style={{ ...styles.safeAreaView, backgroundColor: headerBackgroundColor }} />
 
                 <StatusBar barStyle={statusBarStyle} backgroundColor={statusBarBackgroundColor} />
@@ -214,11 +250,13 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
                         }}>
                             <CustomIcon name={leftIconName} color={leftIconColor} size={leftIconSize} style={leftIconStyle} iconType={leftIconType} />
                         </TouchableOpacity>
-                        : <View />}
+                        : <CustomIcon name={leftIconName} color={"transparent"} size={leftIconSize} style={leftIconStyle} iconType={leftIconType} />}
 
-                    <View style={[titleContainerStyle, { ...styles.titleContainer, marginLeft: leftIconVisible ? -hori : 0 }]}>
-                        <Text style={[titleStyle, { ...styles.titleStyle }]}>{title}</Text>
+                    <View style={[{ ...styles.titleContainer, justifyContent: "center", marginLeft: leftIconVisible ? -hori : 0 }, titleContainerStyle,]}>
+                        <Text style={[{ ...styles.titleStyle }, titleStyle,]}>{title}</Text>
                     </View>
+
+
                     {rightIconVisible && !rightMultiple ?
                         <TouchableOpacity style={[rightIconContainerStyle, {
                             ...styles.rightIconContainerStyle,
@@ -229,11 +267,20 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
                             <CustomIcon name={rightIconName} color={rightIconColor} size={rightIconSize} style={rightIconStyle} iconType={rightIconType} />
                         </TouchableOpacity>
                         :
-                        rightMultiple ? this.rightMultipleRender() : <View />
+                        rightMultiple ? this.rightMultipleRender() :
+                            <CustomIcon name={rightIconName} color={"transparent"} size={rightIconSize} style={rightIconStyle} iconType={rightIconType} />
                     }
                     {searchVisible && this.searchRender()}
                     {optionVisible &&
                         this.optionRender()
+                    }
+                    {rightTextVisible &&
+                        <TouchableOpacity style={[rightIconContainerStyle, {
+                            ...styles.rightIconContainerStyleText,
+                            marginRight: optionVisible ? 0 : hori,
+                        }]} onPress={() => { rightTextPress() }} >
+                            <Text style={[{ ...styles.rightTextStyle }, rightTextStyle,]}>{rightText}</Text>
+                        </TouchableOpacity>
                     }
                 </View>
             </View>
@@ -448,15 +495,26 @@ const styles = StyleSheet.create({
     },
     titleStyle: {
         fontSize: fontSizes._20,
-        color: colors.white,
+        color: colors.black,
         flexShrink: 1,
         // paddingHorizontal: 20,
+    },
+    rightTextStyle: {
+        fontSize: fontSizes._16,
+        color: colors.primary,
+        flexShrink: 1,
     },
     rightIconContainerStyle: {
         // flex: 1,
         alignItems: 'flex-end',
         marginRight: hori,
         // justifyContent: 'flex-end'
+    },
+    rightIconContainerStyleText: {
+        // flex: 1,
+        alignItems: 'flex-end',
+        marginRight: hori,
+        justifyContent: 'center'
     }
 
 });
