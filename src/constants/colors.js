@@ -2,6 +2,7 @@ export default {
     statusbar: "#313D4B",
     background: "#f9f9f9",
     header: "#313D4B",
+    primary:"#fc5356",
     button: "#fc5356",
     buttonText: "#f9f9f9",
     buttonDisable: "#dbdbdb",
