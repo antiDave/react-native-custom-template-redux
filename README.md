@@ -67,7 +67,7 @@ Replace src/screens/Dashboard/index.js with below code
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import CustomHeader from '../../components/CustomHeader';
-import CustomText from '../../components/CustomText';
+import Text from '../../components/CustomText';
 
 export default class index extends Component {
     constructor(props) {
@@ -80,7 +80,7 @@ export default class index extends Component {
         return (
             <View>
                 <CustomHeader />
-                <CustomText>Hello</CustomText>
+                <Text>Hello</Text>
             </View>
         );
     }
