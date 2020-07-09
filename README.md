@@ -16,7 +16,7 @@ Download zip <br/> unzip in the root folder of the project
 # 🎉 Installation Guide! 
 
 # All packages without Redux
-| yarn add @react-navigation/native @react-navigation/stack && yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage rn-fetch-blob  && yarn add --dev babel-plugin-transform-remove-console react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver  <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack && npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage rn-fetch-blob && npm install babel-plugin-transform-remove-console react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver  --save-dev  |
+| yarn add @react-navigation/native @react-navigation/stack && yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage rn-fetch-blob  && yarn add --dev babel-plugin-transform-remove-console react-native-svg-transformer typescript           <h4>using npm</h4> npm install @react-navigation/native @react-navigation/stack && npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view react-native-vector-icons react-native-device-info react-native-dotenv react-native-responsive-dimensions react-native-safe-area-context react-native-svg moment @react-native-community/netinfo @react-native-community/async-storage rn-fetch-blob && npm install babel-plugin-transform-remove-console react-native-svg-transformer typescript           --save-dev  |
 | ------------- | 
 
 # Packages 
@@ -30,7 +30,7 @@ Download zip <br/> unzip in the root folder of the project
 | yarn add react-redux redux  <h4>using npm</h4> npm install react-redux redux |
 | ------------- | 
 
-| yarn add --dev react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver <h4>using npm</h4> npm install react-native-svg-transformer typescript @types/jest @types/react @types/react-native @types/react-test-renderer babel-plugin-module-resolver --save-dev |
+| yarn add --dev react-native-svg-transformer typescript           <h4>using npm</h4> npm install react-native-svg-transformer typescript           --save-dev |
 | ------------- | 
 
 
@@ -67,7 +67,7 @@ Replace src/screens/Dashboard/index.js with below code
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import CustomHeader from '../../components/CustomHeader';
-import Text from '../../components/CustomText';
+import CustomText from '../../components/CustomText';
 
 export default class index extends Component {
     constructor(props) {
@@ -80,7 +80,7 @@ export default class index extends Component {
         return (
             <View>
                 <CustomHeader />
-                <Text>Hello</Text>
+                <CustomText>Hello</CustomText>
             </View>
         );
     }
@@ -114,13 +114,13 @@ android {
 
         def oldnaming=versionProps['VERSION_NAME'].toInteger()
 
-        if(oldnaming % 10 == 0){
+        if(oldnaming % 100 == 0){
             def code = versionProps['VERSION_CODE'].toInteger() + 1
             versionProps['VERSION_CODE']=code.toString()
 
         }
 
- if(oldnaming % 2 == 0){
+ if(oldnaming % 10 == 0){
         def centerChanging=versionProps['VERSION_CENTER_NUMBER1'].toInteger() + 1   
         versionProps['VERSION_CENTER_NUMBER1']=centerChanging.toString()   
           }
