@@ -1,3 +1,5 @@
+import { Linking } from "react-native";
+
 export const emptyValidate = (text) => {
     if (text === "" || text === " " || text === "null" || text === null || text === "undefined" || text === undefined || text === false || text === "false") {
         return false;
@@ -155,3 +157,12 @@ export function removeAllSpaces(text) {
 
 }
 
+export function openURL(url) {
+    Linking.canOpenURL(url).then(supported => {
+        if (supported) {
+            Linking.openURL(url);
+        } else {
+            console.log("Don't know how to open URI: " + url);
+        }
+    });
+}
