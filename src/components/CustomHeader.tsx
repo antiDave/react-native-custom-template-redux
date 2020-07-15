@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, Modal, SafeAreaView, StatusBar, StyleProp, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle, TextInput } from 'react-native';
+import { FlatList, Modal, SafeAreaView, StatusBar, StyleProp, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle, TextInput, Platform } from 'react-native';
 import { fontSizes, marginSizesHeight, marginSizesWidth } from "../constants/sizes";
 import CustomIcon from "./CustomIcon";
 import Text from "./CustomText";
@@ -18,17 +18,6 @@ const colors = {
     heading: globalColors.heading,
     divider: globalColors.divider,
     headerBottomColor: globalColors.headerBottomColor
-    // statusbar: "#313d4b",
-    // background: "#f7f7f7",
-    // header: "#313d4b",
-    // white: "#fff",
-    // transparent: "transparent",
-    // heading: "#000000",
-    // divider: "#E5E5E5",
-    // actionButton: "#fc5356",
-    // actionButton0: "rgba(231,76,60,1)",
-    // actionButton1: '#9b59b6',
-    // actionButton2: 'rgba(252, 83, 86, 1)',
 }
 
 interface CustomHeaderInterface {
@@ -121,20 +110,20 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
 
         leftIconType: 'Ionicons',
         leftIconName: 'md-arrow-back',
-        leftIconColor: colors.primary,
+        leftIconColor: colors.white,
         leftIconSize: 30,
         leftIconStyle: {},
 
         rightIconType: 'Ionicons',
         rightIconName: 'md-search',
-        rightIconColor: colors.primary,
+        rightIconColor: colors.white,
         rightIconSize: 30,
         rightIconStyle: {},
 
         leftIconContainerStyle: {},
         rightIconContainerStyle: {},
         titleContainerStyle: {},
-        title: "Default Title",
+        title: Language["APP_NAME"],// "Default Title",
         navigation: null,
         leftIconVisible: true,
         rightIconVisible: false,
@@ -155,7 +144,7 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
         searchIconStyle: {},
         searchIconName: 'md-search',
         searchIconSize: 30,
-        searchIconColor: colors.primary,
+        searchIconColor: colors.white,
 
         onChangeText(text: any) { },
         searchRightIconVisible: false,
@@ -176,7 +165,7 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
             optionTop: 80,
             optionDataHeight: 20,
             searchInsideIconRight: marginSizesWidth._32,
-
+            searchInsideIconRightTop: 17,
             serachInputRender: false,
             input: '',
             placeHolder: 'Search'
@@ -190,6 +179,7 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
     }
 
     serachInputRenderFALSE = () => {
+        this.props.onChangeText("");
         this.setState({
             serachInputRender: false
         })
@@ -293,6 +283,7 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
     }
 
     clearInput = () => {
+        this.props.onChangeText("");
         this.setState({
             input: ''
         })
@@ -318,6 +309,14 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
 
     }
 
+    onLayoutSearchInput = (e: any) => {
+        let { height } = e.nativeEvent.layout;
+        height = height / 2;
+        this.setState({
+            searchInsideIconRightTop: height
+        })
+    }
+
     serachInputRender = () => {
         let { statusBarStyle, statusBarBackgroundColor, headerBackgroundColor, containerStyle, style, searchIconName, searchIconType, searchIconColor, searchIconSize, searchIconStyle,
             leftIconContainerStyle, rightIconContainerStyle, searchRightIconVisible } = this.props;
@@ -326,13 +325,14 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
                 <SafeAreaView style={{ ...styles.safeAreaView, backgroundColor: headerBackgroundColor }} />
 
                 <StatusBar barStyle={statusBarStyle} backgroundColor={statusBarBackgroundColor} />
-                <View style={[style, { ...styles.headerContainer, backgroundColor: headerBackgroundColor }]}>
+                <View style={[style, { ...styles.headerContainer, alignItems: "center", justifyContent: "center", backgroundColor: headerBackgroundColor }]}>
                     <TouchableOpacity style={[leftIconContainerStyle, { ...styles.leftIconContainer }]} onPress={this.serachInputRenderFALSE}>
                         <CustomIcon name={"md-close"} color={colors.white} size={30} style={{}} iconType={"Ionicons"} />
                     </TouchableOpacity>
 
                     <TextInput
                         style={sIRStyle.textInput}
+                        onLayout={this.onLayoutSearchInput}
                         onChangeText={text => { this.onChangeText(text) }}
                         onFocus={this.onFocus}
                         autoFocus
@@ -343,6 +343,7 @@ export default class CustomHeader extends Component<CustomHeaderInterface, any> 
                     {emptyValidate(this.state.input) &&
                         <TouchableOpacity style={{
                             ...sIRStyle.searchIconContainer,
+                            top: this.state.searchInsideIconRightTop,
                             right: this.state.searchInsideIconRight
                         }} onPress={() => { this.clearInput() }}>
                             <CustomIcon name={"md-close"} color={"#787a7e"} size={20} style={{}} iconType={"Ionicons"} />
@@ -495,7 +496,7 @@ const styles = StyleSheet.create({
     },
     titleStyle: {
         fontSize: fontSizes._20,
-        color: colors.black,
+        color: colors.white,
         flexShrink: 1,
         // paddingHorizontal: 20,
     },
