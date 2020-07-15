@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { Provider as PaperProvider } from 'react-native-paper';
 import Routes from './src/routes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -39,9 +40,10 @@ export default class App extends React.Component {
     return (
       <SafeAreaProvider>
         <NavigationContainer>
+          <PaperProvider>
 
-          <Routes />
-
+            <Routes />
+          </PaperProvider>
         </NavigationContainer>
       </SafeAreaProvider>
     );
