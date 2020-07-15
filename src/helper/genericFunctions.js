@@ -1,4 +1,12 @@
 import { Linking } from "react-native";
+export function emptyValidate(text) {
+    if (text === "" || text === " " || text === "null" || text === null || text === "undefined" || text === undefined || text === false || text === "false") {
+        return false;
+    }
+    else {
+        return true;
+    }
+};//end of emptyValidate/
 
 export default {
     emptyValidate(text) {
