@@ -1,4 +1,3 @@
-import { hexToRgbA } from "../helper/genericFunctions";
 
 export default {
     statusbar: "#eb8934",
@@ -8,7 +7,7 @@ export default {
     button: "#eb8934",
     heading: "#000",
     headerBottomColor: "#dddddd",
-    transparent: hexToRgbA("#000000", 0),
+    transparent: `rgba(255,255,255,0)`,
     buttonText: "#f9f9f9",
     buttonDisable: "#dbdbdb",
     buttonDisableText: "#eb8934",
