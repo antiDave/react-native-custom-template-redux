@@ -1,62 +1,72 @@
 import DeviceInfo from 'react-native-device-info';
+import { Platform } from 'react-native';
 
-export function DeviceIP (){
-    return new Promise(async(resolve) => {
-      const ip=await DeviceInfo.getIpAddress();
+export default {
+  IP() {
+    return new Promise(async (resolve) => {
+      const ip = await DeviceInfo.getIpAddress();
       resolve(ip);
       return;
     })
-    
-}
+  },//end of DeviceIP
 
-export function DeviceType (){
-    return new Promise(async(resolve) => {
-      const type=await DeviceInfo.getDeviceType();
+  type() {
+    return new Promise(async (resolve) => {
+      const type = await DeviceInfo.getDeviceType();
       resolve(type);
       return;
     })
-    
-}
+  },//end of DeviceType
 
-export function DeviceID (){
-    return new Promise(async(resolve) => {
-      const id=await DeviceInfo.getDeviceId(); 
+  ID() {
+    return new Promise(async (resolve) => {
+      const id = await DeviceInfo.getDeviceId();
       resolve(id);
       return;
     })
-    
-}
+  },//end of DeviceID
 
-export function DeviceName (){
-    return new Promise(async(resolve) => {
-      const name=await DeviceInfo.getDeviceName();
+  name() {
+    return new Promise(async (resolve) => {
+      const name = await DeviceInfo.getDeviceName();
       resolve(name);
       return;
     })
-    
-}
+  },//end of DeviceName
 
-export function DeviceOS (){
-    return new Promise(async(resolve) => {
-      const os=await DeviceInfo.getBaseOs();
+  OS() {
+    return new Promise(async (resolve) => {
+      const os = await DeviceInfo.getBaseOs();
       resolve(os);
       return;
     })
-    
-}
+  },//end of DeviceOS
 
+  appVersion() {
+    return new Promise(async (resolve) => {
+      let version = DeviceInfo.getVersion();
+      let buildNumber = "";
+      if (Platform.OS === "ios") {
+        buildNumber = DeviceInfo.getBuildNumber();
+      }
 
-export function DeviceForm (){
-    return new Promise(async(resolve) => {
-        if(Platform.OS==='android'){
-            resolve('ANDROID');
-            return;
-          }
-          if(Platform.OS==='ios'){
-            resolve('IOS');
-            return;
-          }
+      let string = "Version " + version + "." + buildNumber;
+      resolve(string);
+      return;
     })
-    
-}
+  },//end of AppVersion
 
+  form() {
+    return new Promise(async (resolve) => {
+      if (Platform.OS === 'android') {
+        resolve('ANDROID');
+        return;
+      }
+      if (Platform.OS === 'ios') {
+        resolve('IOS');
+        return;
+      }
+    })
+  },//end of DeviceForm
+
+}//end of EXPORT DEFAULT

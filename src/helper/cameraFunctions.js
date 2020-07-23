@@ -1,133 +1,88 @@
-import ImagePicker from 'react-native-image-picker';
+import ImagePickerCrop from 'react-native-image-crop-picker';
+import genericFunctions from './genericFunctions';
 
 let callCamera = 5;
 let callGallery = 5;
 
 export default {
-    camera() {
+
+
+    camera(includeBase64 = false, mediaType = "photo", cropping = false) {
         return new Promise((resolve) => {
-            const options = {};
-            ImagePicker.launchCamera(options, (response) => {
+            ImagePickerCrop.openCamera({
+                mediaType: mediaType,
+                cropping: cropping,
+                includeBase64: includeBase64,
+                compressImageMaxHeight: 300,
+                compressImageMaxWidth: 300,
+                compressImageQuality: 0.7,
+                forceJpg: true,
 
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                    resolve(false);
-                } else if (response.error) {
-                    if (response.error.includes("Permissions weren't granted")) {
-                        if (callCamera < 6) {
-                            this.camera();
-                            callCamera++;
-                        }
-
+            }).then(images => {
+                let newImages = [];
+                newImages.push(images);
+                newImages.map(e => {
+                    e.id = genericFunctions.RandomID();
+                    return
+                })
+                resolve(newImages);
+            }).catch(err => {
+                if (err.includes("[Error: User cancelled image selection]")) {
+                    resolve(undefined);
+                } else if (err.includes("Permissions weren't granted")) {
+                    if (callCamera < 6) {
+                        this.camera();
+                        callCamera++;
                     }
-                    console.log('ImagePicker Error: ', response.error);
-                    resolve(false);
-                } else if (response.customButton) {
-                    console.log('User tapped custom button: ', response.customButton);
-                    resolve(false);
-                } else {
-                    const source = { uri: "file://" + response.path };
-
-                    // You can also display the image using data:
-                    // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                    resolve(response);
-
+                }
+                else {
+                    console.warn("ERROR from CATCH IMAGE PICKER", err);
+                    // AppSnackBar.show("Error from Image Picker! ");
+                    resolve(undefined);
                 }
             });
         })//end of PROMISE
     },
 
-    gallery() {
+    gallery(multiple = false, includeBase64 = false, mediaType = "photo", cropping = false) {
         return new Promise((resolve) => {
-            const options = {};
-            ImagePicker.launchImageLibrary(options, (response) => {
+            ImagePickerCrop.openPicker({
+                multiple: multiple,
+                mediaType: mediaType,
+                cropping: cropping,
+                includeBase64: includeBase64,
+                compressImageMaxHeight: 300,
+                compressImageMaxWidth: 300,
+                compressImageQuality: 0.7,
+                forceJpg: true,
 
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                    resolve(false);
-                } else if (response.error) {
-                    if (response.error.includes("Permissions weren't granted")) {
-                        if (callGallery < 6) {
-                            this.gallery();
-                            callGallery++;
-                        }
+            }).then(images => {
+                images.map(e => {
+                    e.id = genericFunctions.RandomID();
+                    return
+                })
+                resolve(images);
+            }).catch(err => {
+
+                if (err.includes("[Error: User cancelled image selection]")) {
+                    resolve(undefined);
+                }
+                else if (err.includes("Permissions weren't granted")) {
+                    if (callGallery < 6) {
+                        this.gallery();
+                        callGallery++;
                     }
-                    console.log('ImagePicker Error: ', response.error);
-                    resolve(false);
-                } else if (response.customButton) {
-                    console.log('User tapped custom button: ', response.customButton);
-                    resolve(false);
-                } else {
-
-                    // const source = { uri: response.uri };
-                    const source = { uri: "file://" + response.path };
-
-                    // You can also display the image using data:
-                    // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                    resolve(response);
-
                 }
+                else {
+                    console.warn("ERROR from CATCH IMAGE PICKER", err);
+                    // AppSnackBar.show("Error from Image Picker! ");
+                    resolve(undefined);
+                }
+
             });
         })//end of PROMISE
     },
 
-    cameraSingle() {
-        return new Promise((resolve) => {
-            const options = {};
-            ImagePicker.launchCamera(options, (response) => {
-
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                    resolve(false);
-                } else if (response.error) {
-                    console.log('ImagePicker Error: ', response.error);
-                    resolve(false);
-                } else if (response.customButton) {
-                    console.log('User tapped custom button: ', response.customButton);
-                    resolve(false);
-                } else {
-                    const source = { uri: "file://" + response.path };
-
-                    // You can also display the image using data:
-                    // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                    resolve(response);
-
-                }
-            });
-        })//end of PROMISE
-    },
-
-    gallerySingle() {
-        return new Promise((resolve) => {
-            const options = {};
-            ImagePicker.launchImageLibrary(options, (response) => {
-
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                    resolve(false);
-                } else if (response.error) {
-                    console.log('ImagePicker Error: ', response.error);
-                    resolve(false);
-                } else if (response.customButton) {
-                    console.log('User tapped custom button: ', response.customButton);
-                    resolve(false);
-                } else {
-
-                    // const source = { uri: response.uri };
-                    const source = { uri: "file://" + response.path };
-
-                    // You can also display the image using data:
-                    // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                    resolve(response);
-
-                }
-            });
-        })//end of PROMISE
-    },
 
 }//end of EXPORT DEFAULT
 
