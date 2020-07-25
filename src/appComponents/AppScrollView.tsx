@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, ScrollView, StyleProp, ViewStyle, ScrollViewProps } from 'react-native';
 //END OF IMPORT's
 
 
@@ -14,13 +14,17 @@ interface componentInterface {
     style?: StyleProp<ViewStyle>;
 }//end of INTERFACE 
 
+interface AllInterface extends componentInterface, ScrollViewProps {
+
+}//end of INTERFACE 
+
 const colors = {
     background: '#fffff'
 };//end of COLORS
 
-export default class AppScrollView extends Component<componentInterface, any> {
+export default class AppScrollView extends Component<AllInterface, any> {
 
-    constructor(props: componentInterface) {
+    constructor(props: AllInterface) {
         super(props);
         this.state = {
         };
@@ -36,7 +40,8 @@ export default class AppScrollView extends Component<componentInterface, any> {
     };//end of DEFAULT PROPS DECLARATION
 
     render() {
-        let { center, showHorizontialScroll, showVerticalScroll, style, userFlexGrow, nestedScrollEnabled } = this.props;
+        let { center, showHorizontialScroll, showVerticalScroll, style, userFlexGrow, nestedScrollEnabled,
+            ...otherProps } = this.props;
         return (
             <ScrollView
                 bounces={false}
@@ -48,7 +53,8 @@ export default class AppScrollView extends Component<componentInterface, any> {
                     justifyContent: center ? "center" : "flex-start"
                 },
                     style
-                ]}>
+                ]}
+                {...otherProps}>
                 {this.props.children}
             </ScrollView>
 
