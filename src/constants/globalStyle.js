@@ -58,7 +58,7 @@ export default globalStyle = {
         flex: 1,
     },
     divider: {
-        width: widthSize._100,
+        width: "100%",
         height: 1,
         fontWeight: 'bold',
         borderBottomWidth: 1,

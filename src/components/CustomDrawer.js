@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import Text from './CustomText';
-import Logo from "../../assets/images/svg/logo.svg";
-import { Language } from '../locales';
-import { getUsers } from '../localDatabase/User';
-import { UserQueries } from '../utils/Queries';
-import _retrieveData from '../sharedPreferences/_retrieveData';
+import { FlatList, SafeAreaView, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import globalStyle from '../constants/globalStyle';
-import { emptyValidate } from '../helper/genericFunctions';
+import genericFunctions, { emptyValidate } from '../helper/genericFunctions';
+import { Language } from '../locales';
 import _deleteData from '../sharedPreferences/_deleteData';
-
+import Device from '../utils/Device';
+import Text from './CustomText';
+import LocalImages, { sizesLocalImages } from '../helper/LocalImages';
+import { marginSizesHeight } from '../constants/sizes';
+import globalColor from "../constants/colors";
 
 const menu = [
     {
         id: 1,
-        name: Language["drawer.selectlanguage"],
+        name: Language["selectlanguage"],
         child: [{
             id: 1,
-            name: Language["drawer.english"]
-        },
-        {
-            id: 2,
-            name: Language["drawer.urdu"]
+            name: Language["english"]
         }]
     },
     {
         id: 2,
         name: " ",
         child: [{
-            id: 3,
-            name: Language["drawer.Logout"]
+            id: "logout",
+            name: Language["logout"]
         }]
     },
 
@@ -49,29 +44,24 @@ export default class CustomDrawer extends Component {
             loginId: null,
             menu: menu,
             name: null,
-            phoneNumber: null
+            phoneNumber: null,
+
+            version: ""
         };
     }
 
     componentDidMount = async () => {
+        let appVersion = await Device.appVersion();
+        this.setState({
+            version: appVersion
+        })
+
         this.loadProfile()
 
     }
 
     loadProfile = async () => {
-        const loginId = await _retrieveData("loginId");
-        this.setState({
-            loginId
-        })
-        let query = UserQueries.fetchUserInfo.replace("{str}", loginId);
-        const user = await getUsers(query);
-        if (user && user.length !== 0) {
-            let { fullName, phoneNumber } = user[0];
-            this.setState({
-                name: fullName,
-                phoneNumber
-            })
-        }
+
     }
 
     render() {
@@ -82,7 +72,7 @@ export default class CustomDrawer extends Component {
                 <View style={styles.container}>
                     {/* ******************** Logo and Heading Start ******************** */}
                     <View style={styles.logoContainer}>
-                        <Logo height={150} width={250} />
+                        <Image source={LocalImages.logo} style={styles.logo} />
                     </View>
                     {name !== null &&
                         <Text style={styles.title}>{name}</Text>
@@ -114,6 +104,12 @@ export default class CustomDrawer extends Component {
 
                 </View>
 
+                {/* ******************** VERSION Start ******************** */}
+                <View style={styles.versionContainer}>
+                    <Text style={styles.versionText}>{this.state.version}</Text>
+                </View>
+
+                {/* ******************** VERSION End ******************** */}
             </SafeAreaView>
         );
     }//end of Render
@@ -136,9 +132,8 @@ export default class CustomDrawer extends Component {
 
     itemPress = async (id) => {
         console.warn('Drawer ID', id);
-        if (id === 3) {
+        if (id === "logout") {
             //Logout
-            await _deleteData("loginId")
             this.props.setIsLoggedIn(false)
         }
     }
@@ -148,6 +143,22 @@ export default class CustomDrawer extends Component {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: globalStyle.screenPadding
+    },
+    versionContainer: {
+        alignSelf: "center",
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
+        flex: 1
+    },
+    logo: {
+        height: sizesLocalImages.drawerLogo,
+        width: sizesLocalImages.drawerLogo,
+        borderRadius: sizesLocalImages.drawerLogo / 2,
+        marginVertical: marginSizesHeight._16,
+        resizeMode: "stretch"
+    },
+    versionText: {
+        color: genericFunctions.hexToRgbA(globalColor.text212121, 50)
     },
     logoContainer: {
         alignItems: 'center',
