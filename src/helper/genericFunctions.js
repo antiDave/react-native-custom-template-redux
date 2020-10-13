@@ -1,4 +1,5 @@
-import { Linking } from "react-native";
+import { Dimensions, Platform, StatusBar,Linking } from 'react-native';
+
 export function emptyValidate(text) {
     if (text === "" || text === " " || text === "null" || text === null || text === "undefined" || text === undefined || text === false || text === "false") {
         return false;
@@ -7,6 +8,7 @@ export function emptyValidate(text) {
         return true;
     }
 };//end of emptyValidate/
+
 
 export default {
     emptyValidate(text) {
@@ -196,4 +198,68 @@ export default {
         })//end of PROMISE
     },//end of mapFirstCharacterWithNestedArray
 
+    getStatusBarHeight(skipAndroid=false){
+        getStatusBarHeight(skipAndroid);
+    },//end of getStatusBarHeight
+    
+    isIPhoneX(){
+        isIPhoneX();
+    },//end of isIPhoneX
+    
+    isIPhoneXMax(){
+        isIPhoneXMax();
+    },//end of isIPhoneXMax
+    
+    isIPhoneWithMonobrow_v(){
+        isIPhoneWithMonobrow_v();
+    },//end of isIPhoneWithMonobrow_v
+    
+    isExpo(){
+        isExpo();
+    },//end of isExpo
+    
 }//end of EXPORT DEFAULT
+
+
+
+const X_WIDTH = 375;
+const X_HEIGHT = 812;
+
+const XSMAX_WIDTH = 414;
+const XSMAX_HEIGHT = 896;
+
+const { height: W_HEIGHT, width: W_WIDTH } = Dimensions.get('window');
+
+let isIPhoneX_v = false;
+let isIPhoneXMax_v = false;
+let isIPhoneWithMonobrow_v = false;
+
+if (Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS) {
+    if (W_WIDTH === X_WIDTH && W_HEIGHT === X_HEIGHT) {
+        isIPhoneWithMonobrow_v = true;
+        isIPhoneX_v = true;
+    }
+
+    if (W_WIDTH === XSMAX_WIDTH && W_HEIGHT === XSMAX_HEIGHT) {
+        isIPhoneWithMonobrow_v = true;
+        isIPhoneXMax_v = true;
+    }
+}
+
+ const isIPhoneX = () => isIPhoneX_v;
+ const isIPhoneXMax = () => isIPhoneXMax_v;
+ const isIPhoneWithMonobrow = () => isIPhoneWithMonobrow_v;
+
+const getExpoRoot = () => global.Expo || global.__expo || global.__exponent;
+
+ const isExpo = () => getExpoRoot() !== undefined;
+
+ function getStatusBarHeight(skipAndroid) {
+    return Platform.select({
+        ios: isIPhoneWithMonobrow_v ? 44 : 20,
+        android: skipAndroid ? 0 : StatusBar.currentHeight,
+        default: 0
+    })
+}
+
+
