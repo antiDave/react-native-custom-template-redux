@@ -176,6 +176,7 @@ export default {
             resolve(newArray)
         })//end of PROMISE
     },//end of mapFirstCharacterWithNestedArray
+    
     mapFirstCharacterWithNestedArray(array, arrayName, keyName) {
         return new Promise((resolve) => {
             let newArray = [];
