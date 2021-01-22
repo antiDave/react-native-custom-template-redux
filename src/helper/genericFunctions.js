@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StatusBar,Linking } from 'react-native';
+import { Dimensions, Platform, StatusBar, Linking } from 'react-native';
 
 export function emptyValidate(text) {
     if (text === "" || text === " " || text === "null" || text === null || text === "undefined" || text === undefined || text === false || text === "false") {
@@ -176,7 +176,7 @@ export default {
             resolve(newArray)
         })//end of PROMISE
     },//end of mapFirstCharacterWithNestedArray
-    
+
     mapFirstCharacterWithNestedArray(array, arrayName, keyName) {
         return new Promise((resolve) => {
             let newArray = [];
@@ -199,26 +199,35 @@ export default {
         })//end of PROMISE
     },//end of mapFirstCharacterWithNestedArray
 
-    getStatusBarHeight(skipAndroid=false){
+    getStatusBarHeight(skipAndroid = false) {
         getStatusBarHeight(skipAndroid);
     },//end of getStatusBarHeight
-    
-    isIPhoneX(){
+
+    isIPhoneX() {
         isIPhoneX();
     },//end of isIPhoneX
-    
-    isIPhoneXMax(){
+
+    isIPhoneXMax() {
         isIPhoneXMax();
     },//end of isIPhoneXMax
-    
-    isIPhoneWithMonobrow_v(){
+
+    isIPhoneWithMonobrow_v() {
         isIPhoneWithMonobrow_v();
     },//end of isIPhoneWithMonobrow_v
-    
-    isExpo(){
+
+    isExpo() {
         isExpo();
     },//end of isExpo
-    
+
+    getURLParameterByName(name, url = '') {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    },//end of getURLParameterByName
+
 }//end of EXPORT DEFAULT
 
 
@@ -247,15 +256,15 @@ if (Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS) {
     }
 }
 
- const isIPhoneX = () => isIPhoneX_v;
- const isIPhoneXMax = () => isIPhoneXMax_v;
- const isIPhoneWithMonobrow = () => isIPhoneWithMonobrow_v;
+const isIPhoneX = () => isIPhoneX_v;
+const isIPhoneXMax = () => isIPhoneXMax_v;
+const isIPhoneWithMonobrow = () => isIPhoneWithMonobrow_v;
 
 const getExpoRoot = () => global.Expo || global.__expo || global.__exponent;
 
- const isExpo = () => getExpoRoot() !== undefined;
+const isExpo = () => getExpoRoot() !== undefined;
 
- function getStatusBarHeight(skipAndroid) {
+function getStatusBarHeight(skipAndroid) {
     return Platform.select({
         ios: isIPhoneWithMonobrow_v ? 44 : 20,
         android: skipAndroid ? 0 : StatusBar.currentHeight,
